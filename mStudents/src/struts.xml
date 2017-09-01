@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置为开发模式 -->
+    <constant name="struts.devMode" value="true" />
+     <!-- 将对象交给spring管理 -->    
+    <constant name="struts.objectFactory" value="spring" />    
+    <!-- 配置扩展名为action -->
+	<constant name="struts.action.extension" value="action"/>
+	<!-- 指定资源编码类型 -->    
+    <constant name="struts.i18n.encoding" value="UTF-8" />     
+    <!-- 指定每次配置文件更改后，自动重新加载 -->    
+    <constant name="struts.configuration.xml.reload" value="false" />    
+      <!-- 把主题配置为simple   -->
+    <constant name="struts.ui.theme" value="simple" />
+    
+     	<!-- 测试用的action,当与Spring整合后，class属性写的就是bean的名称 -->
+    <package name="default" namespace="/" extends="struts-default,json-default">
+			<action name="login_*" class="com.common.action.LoginAction" method="{1}">  
+		            <result name="success" >/main.jsp</result>
+		            <result name="failed">/login.jsp</result>
+       	    </action> 
+   
+			 <action name="upDownFileAction_*" class="com.common.action.UpDownFileAction" method="{1}">  
+                    <result name="success" type="json">  
+                        <param name="root">result</param>  
+                    </result>
+            </action>
+            <action name="commonAction_*" class="com.common.action.CommonAction" method="{1}">  
+                    <result name="success" type="json">  
+                        <param name="root">result</param>  
+                    </result>
+            </action>    
+            
+    </package>
+    
+    
+    
+  <include file="com/teacher/action/teacherAction.xml"></include> 
+  <include file="com/student/action/studentAction.xml"></include> 
+    
+</struts>
